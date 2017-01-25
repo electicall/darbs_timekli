@@ -29,12 +29,28 @@ class DarbsController extends Controller
         return $this->render('woch/index.html.twig');
     }
 
+     /**
+     * @Route("/woch/grozs/{id}", name="grozs_woch")
+     */
+    public function grozsAction($id)
+    {
+        return $this->redirectToRoute('preces_woch');
+    }
+
     /**
      * @Route("/woch/preces", name="preces_woch")
      */
     public function precesAction(Request $request)
     {
-        return $this->render('woch/preces.html.twig');
+
+          $preces=$this->getDoctrine()
+            ->getRepository('AppBundle:products')
+            ->findAll();
+
+        return $this->render('woch/preces.html.twig', array(
+                'preces' => $preces
+            ));
+
     }
 
     /**
@@ -68,7 +84,16 @@ class DarbsController extends Controller
      */
     public function adminAction(Request $request)
     {
-        return $this->render('woch/admin.html.twig');
+
+        $users=$this->getDoctrine()
+            ->getRepository('AppBundle:users')
+            ->findAll();
+
+      
+
+        return $this->render('woch/admin.html.twig', array(
+                'lietotaji' => $users
+                ));
     }
     /**
      * @Route("/woch/login", name="login_woch")
@@ -77,6 +102,25 @@ class DarbsController extends Controller
     {
         return $this->render('woch/login.html.twig');
     }
+
+    /**
+     * @Route("/woch/dzest/{id}", name="dzest_woch")
+     */
+    public function dzestAction($id)
+    {
+            
+            $datab=$this->getDoctrine()->getManager();
+            $user=$datab->getRepository('AppBundle:users')->find($id);
+            $datab->remove($user);
+            $datab->flush();
+            $this->addFlash(
+                'notice',
+                'Lietotājs dzēsts'
+                );
+            return $this->redirectToRoute('admin_woch');
+
+    }
+
     /**
      * @Route("/woch/register", name="register_woch")
      */

@@ -1,5 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-ADMIN WOCH
+<h2 class="page-header">Lietotāju apstrāde</h2>
+
+
+
+<table class="table table-striped">
+<thead>
+<tr>
+  <th>Vārds</th>
+  <th>UZvārds</th>
+  <th>lietotājvārds</th>
+  <th>E-pasts</th>
+  <th>Tiesības</th>
+  <th>Pievienošanas datums</th>
+  <th></th>
+  </tr>
+</thead>
+<tbody>
+{% for users in lietotaji %}
+<tr>
+  <td>{{users.name}}</td>
+  <td>{{users.lastname}}</td>
+  <td>{{users.username}}</td>
+  <td>{{users.email}}</td>
+  <td>{{users.role}}</td>
+  <td>{{users.createdate|date('j/m/Y, H:i')}}</td>
+  <td><a class = "btn btn-danger" href="/woch/dzest/{{users.id}}">Dzēst</a>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
 {% endblock %}

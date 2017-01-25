@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-PRECES WOCH
+{% for products in preces %}
+
+<div class="col-sm-4"><h3>{{products.name}}</h3>
+						<img src="{{ asset(products.imagepath) }}" alt="{{products.name}}" />
+                	<p>Ražotājs:{{products.producer}}
+                	<p>Cena:{{products.price}}
+	  				<p>{{products.description}}</p>
+	  				<a href="/woch/grozs/{{products.id}}" class="btn btn-success">Pirkt</a>
+	  					
+	  			</div>
+{% if products.id % 3 == 0 %}
+    <div class="row"></div>
+{% endif %}
+
+{% endfor %}
+
 {% endblock %}
