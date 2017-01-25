@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div>
+	<div class="center">
+		<h3>Par mums</h3>
+	<p>Mēs esam uzņēmums, kas piedāvā saviem klientiem telefona lādētājus, kurus ir iespējams uzlādēt ar saules enerģiju. Ir pieejami dažādi lādētāju modeļi ar dažādiem tehniskiem parametriem un dizaina risinājumiem. Viena produkta cenā ir iekļauta arī summa (5 eiro), kas tiek ziedota labdarībai. Pēc pircēja vēlmes šo summu ir iespējams arī palielināt, šajā gadījumā ziedošanai tiek nodota summa, kuru nosaka pats pircējs. Pirkšanas brīdī klientam ir iespēja ne tikai regulēt ziedojuma apjomu, bet arī izvēlēties labdarības projektu, kuram tiks pārskaitīta nauda.
+	</p>
+</div>
+	{% image '@AppBundle/Resources/public/images/product.png' %}
+        <img src="{{ asset_url }}" alt="product" class="img-responsive center-block" />
+  	{% endimage %}
+</div>
+
+
+
+
+
+{% endblock %}

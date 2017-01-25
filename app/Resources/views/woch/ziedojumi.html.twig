@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for charity in ziedojumi %}
+
+<div class="col-sm-4"><h3>{{charity.charityname}}</h3>
+	  					{% image '@AppBundle/Resources/public/images/noimagefound.jpg' %}
+                    		<img src="{{ asset_url }}" alt="Logo" />
+                		{% endimage %}
+	  				<p>{{charity.charitydescription}}</p>
+	  				<a href="/woch/ziedo/{{charity.id}}" class="btn btn-success">Ziedot</a>
+	  					
+	  			</div>
+{% endfor %}
+
+{% endblock %}
