@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-Šeit paredzēte ielogošanās sistēmā. 
+<h2 class="page-header">Login</h2>
+{{form_start(form)}}
+{{form_widget(form)}}
+{{form_end(form)}}
 {% endblock %}

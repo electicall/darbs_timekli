@@ -17,6 +17,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class DarbsController extends Controller
@@ -109,7 +112,34 @@ class DarbsController extends Controller
      */
     public function loginAction(Request $request)
     {
-        return $this->render('woch/login.html.twig');
+             $logins = new users;
+
+        $form = $this->createFormBuilder($logins)
+            ->add('username', TextType::class, array('attr' =>array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+            ->add('password', PasswordType::class, array('attr' =>array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+            ->add('save', SubmitType::class, array('label'=>'Log in', 'attr' =>array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+                $username = $form['username']->getData();
+                $password = $form['password']->getData();
+                
+                return $this->render('woch/login2.html.twig', array ( 'username' => $username, 'password' => md5($password)));
+          }
+            return $this->render('woch/login.html.twig', array (
+            'form' => $form->createView()
+            ));
+    }
+
+    /**
+     * @Route("/woch/loginsucces", name="login2_woch")
+     */
+    public function login2Action(Request $request)
+    {
+        return $this->render('woch/login2.html.twig');
     }
 
     /**
