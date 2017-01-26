@@ -34,7 +34,16 @@ class DarbsController extends Controller
      */
     public function grozsAction($id)
     {
-        return $this->redirectToRoute('preces_woch');
+        $preces=$this->getDoctrine()
+            ->getRepository('AppBundle:products')
+            ->find($id);
+
+        return $this->render('woch/grozs.html.twig', array(
+                'preces' => $preces
+            ));
+
+
+        return $this->render('woch/grozs.html.twig');
     }
 
     /**
